@@ -1,0 +1,140 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Mail, Lock, ArrowRight, Globe, AlertCircle } from 'lucide-react';
+import Card from '../components/Card';
+import Input from '../components/Input';
+import Button from '../components/Button';
+
+import GoogleAuthButton from '../components/GoogleAuthButton';
+
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setError('');
+
+    // Basic Validation
+    if (!email || !password) {
+      setError('Please enter both your corporate email and password.');
+      return;
+    }
+
+    if (!email.includes('@')) {
+      setError('Please enter a valid corporate email address.');
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Simulate login delay
+    setTimeout(() => {
+      setIsLoading(false);
+      navigate('/dashboard');
+    }, 1500);
+  };
+
+  return (
+    <div className="flex items-center justify-center">
+      <Card className="w-full max-w-[440px] shadow-[0_0_80px_rgba(0,0,0,0.6)] border-white/[0.03] relative overflow-hidden group py-10 px-8">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/40 to-transparent opacity-50" />
+        <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-1000" />
+        
+        <form onSubmit={handleLogin} className="space-y-8 relative z-10">
+          <div className="space-y-3 text-center">
+            <h2 className="text-4xl font-black text-text-main tracking-tighter">Access Elite</h2>
+            <p className="text-text-muted font-medium text-sm">Secure corporate shuttle authentication</p>
+          </div>
+
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+              <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" />
+              <p className="text-xs font-bold text-red-200 leading-relaxed">{error}</p>
+            </div>
+          )}
+
+          <div className="space-y-5">
+            <Input
+              label="Corporate Email"
+              type="email"
+              placeholder="name@company.com"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError('');
+              }}
+              required
+              className="h-14 bg-white/[0.02] border-white/[0.05] focus:bg-white/[0.04] transition-all"
+            />
+            <div className="space-y-2">
+              <Input
+                label="Secure Password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (error) setError('');
+                }}
+                required
+                className="h-14 bg-white/[0.02] border-white/[0.05] focus:bg-white/[0.04] transition-all"
+              />
+              <div className="flex justify-end">
+                <button 
+                  type="button" 
+                  onClick={() => alert('Password reset link sent to your corporate email.')}
+                  className="text-[10px] font-black text-primary uppercase tracking-[0.15em] hover:text-primary-dark transition-colors py-1"
+                >
+                  Forgot Password?
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-5">
+            <Button 
+              type="submit" 
+              loading={isLoading}
+              className="w-full h-14 text-lg font-black uppercase tracking-widest group shadow-[0_10px_30px_rgba(34,197,94,0.15)]"
+            >
+              Authenticate
+              {!isLoading && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
+            </Button>
+            
+            <div className="relative flex items-center justify-center py-2">
+              <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-white/[0.05]"></div></div>
+              <span className="relative px-4 bg-card text-[10px] font-black text-text-dim uppercase tracking-[0.2em]">or sign in with</span>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4">
+              <GoogleAuthButton />
+              
+              <Button 
+                variant="secondary" 
+                type="button" 
+                className="w-full h-14 bg-white/[0.03] border-white/[0.05] hover:bg-white/[0.06] group"
+                onClick={() => alert('Redirecting to Corporate SSO...')}
+              >
+                <Globe className="mr-2 w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
+                Corporate SSO
+              </Button>
+            </div>
+          </div>
+
+          <div className="text-center pt-2">
+            <p className="text-xs text-text-dim font-bold uppercase tracking-wider">
+              Protected by Enterprise Security
+            </p>
+          </div>
+        </form>
+      </Card>
+    </div>
+  );
+};
+
+export default LoginPage;
