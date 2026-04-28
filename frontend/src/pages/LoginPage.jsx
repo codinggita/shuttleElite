@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Mail, Lock, ArrowRight, Globe, AlertCircle } from 'lucide-react';
+import { ArrowRight, Globe, AlertCircle } from 'lucide-react';
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Button from '../components/Button';

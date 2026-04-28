@@ -1,9 +1,9 @@
-import React from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '../utils/cn';
 
 const Card = ({ children, className, title, subtitle, footer }) => {
   return (
-    <div className={twMerge('glass-card p-6 transition-all duration-300 hover:border-border-hover', className)}>
+    <div className={cn('glass-card p-6 transition-all duration-300 hover:border-border-hover', className)}>
       {(title || subtitle) && (
         <div className="mb-6">
           {title && <h3 className="text-xl font-bold text-text-main tracking-tight">{title}</h3>}

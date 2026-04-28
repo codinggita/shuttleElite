@@ -1,6 +1,5 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, Bus, Clock, MapPin, User, Star, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, Bus, Star, ShieldCheck } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 

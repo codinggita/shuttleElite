@@ -1,6 +1,5 @@
-import React from 'react';
+import { Calendar, ChevronRight, Bus, Download, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { Calendar, MapPin, ChevronRight, Bus, Download, Filter } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 
@@ -70,7 +69,22 @@ const RideHistoryPage = () => {
 
       {/* History List */}
       <div className="space-y-6">
-        {rides.map((ride) => (
+        {rides.length === 0 ? (
+          <Card className="text-center py-20 bg-white/[0.02]">
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center">
+                <Bus className="w-10 h-10 text-text-dim" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-text-main">No rides yet</h3>
+                <p className="text-text-muted mt-2">Your sustainable commute journey begins here.</p>
+              </div>
+              <Button onClick={() => navigate('/request')} className="mt-4">
+                Book Your First Ride
+              </Button>
+            </div>
+          </Card>
+        ) : rides.map((ride) => (
           <Card 
             key={ride.id} 
             onClick={() => alert(`Showing receipt and details for ride ${ride.id}`)}
@@ -127,10 +141,12 @@ const RideHistoryPage = () => {
       </div>
 
       {/* Pagination / Load More */}
-      <div className="pt-10 flex flex-col items-center gap-4">
-        <p className="text-text-dim text-sm font-bold uppercase tracking-[0.2em]">End of History</p>
-        <div className="w-12 h-1 bg-white/5 rounded-full" />
-      </div>
+      {rides.length > 0 && (
+        <div className="pt-10 flex flex-col items-center gap-4">
+          <p className="text-text-dim text-sm font-bold uppercase tracking-[0.2em]">End of History</p>
+          <div className="w-12 h-1 bg-white/5 rounded-full" />
+        </div>
+      )}
     </div>
   );
 };
