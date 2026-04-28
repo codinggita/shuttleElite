@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { MapPin, Clock, Calendar, ChevronLeft, Info, Sparkles } from 'lucide-react';
 import Card from '../components/Card';
@@ -14,12 +14,6 @@ const RideRequestPage = () => {
     time: '',
     date: '2026-04-25',
   });
-
-  useEffect(() => {
-    if (location.state?.route) {
-      setFormData(prev => ({ ...prev, drop: location.state.route }));
-    }
-  }, [location.state]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

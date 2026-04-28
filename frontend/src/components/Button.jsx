@@ -1,6 +1,5 @@
-import React from 'react';
-import { clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '../utils/cn';
 
 const Button = ({ children, className, variant = 'primary', loading = false, disabled, ...props }) => {
   const variants = {
@@ -14,7 +13,7 @@ const Button = ({ children, className, variant = 'primary', loading = false, dis
   return (
     <button
       disabled={loading || disabled}
-      className={twMerge(
+      className={cn(
         'inline-flex items-center justify-center rounded-xl font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]',
         variants[variant],
         className

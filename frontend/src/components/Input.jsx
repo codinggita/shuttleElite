@@ -1,5 +1,5 @@
-import React from 'react';
-import { twMerge } from 'tailwind-merge';
+
+import { cn } from '../utils/cn';
 
 const Input = ({ label, error, className, ...props }) => {
   return (
@@ -10,7 +10,7 @@ const Input = ({ label, error, className, ...props }) => {
         </label>
       )}
       <input
-        className={twMerge(
+        className={cn(
           'input-field',
           error && 'border-red-500/50 focus:ring-red-500/20 focus:border-red-500',
           className

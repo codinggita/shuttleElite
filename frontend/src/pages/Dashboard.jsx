@@ -1,6 +1,5 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bus, Calendar, MapPin, Clock, ArrowRight, TrendingUp, Zap, Star } from 'lucide-react';
+import { Bus, MapPin, Clock, ArrowRight, TrendingUp, Zap, Star } from 'lucide-react';
 import Card from '../components/Card';
 import Button from '../components/Button';
 
