@@ -5,6 +5,7 @@ import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import Dashboard from './pages/Dashboard';
 import RideRequestPage from './pages/RideRequestPage';
 import RideConfirmationPage from './pages/RideConfirmationPage';
@@ -18,7 +19,9 @@ function App() {
         {/* Auth Routes */}
         <Route element={<AuthLayout />}>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
         </Route>
+
 
         {/* Protected Routes */}
         <Route element={<MainLayout />}>
