@@ -48,7 +48,14 @@ const MapWidget = ({ pickup = "Electronic City, Bangalore", drop = "Koramangala,
   };
 
   if (loadError) return <div className="h-full w-full flex items-center justify-center text-red-500 bg-card rounded-[2rem]">Error loading map</div>;
-  if (!isLoaded) return <div className="h-full w-full bg-card animate-pulse rounded-[2rem]" />;
+  if (!isLoaded) return (
+    <div className="h-full w-full bg-card animate-pulse rounded-[2.5rem] flex items-center justify-center">
+      <div className="text-center space-y-3">
+        <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto" />
+        <p className="text-text-muted font-black text-[10px] uppercase tracking-[0.2em] animate-pulse">Initializing Elite Maps...</p>
+      </div>
+    </div>
+  );
 
   return (
     <div className="h-[400px] md:h-[500px] w-full rounded-[2.5rem] overflow-hidden border border-white/5 relative group">
