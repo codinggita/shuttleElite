@@ -10,34 +10,27 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const connectDB = require("./src/config/db");
 
-// ✅ Production-grade CORS — allows Vercel frontend + localhost dev
+// ✅ Production-grade CORS — allows specific Vercel domains + localhost
 const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'https://shuttle-elite.vercel.app',
-  'https://shuttleelite.vercel.app',
-  // Allow any Vercel preview deployments
-  /\.vercel\.app$/,
+  "https://shuttle-elite.vercel.app",
+  "https://shuttle-elite-529qxi5sh-harshilpatels-projects-e1a200a3.vercel.app",
+  "https://shuttleelite.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000"
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (Postman, Render health checks)
-    if (!origin) return callback(null, true);
-    
-    const isAllowed = allowedOrigins.some((allowed) =>
-      typeof allowed === 'string' ? allowed === origin : allowed.test(origin)
-    );
-    
-    if (isAllowed) {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
       callback(null, true);
     } else {
-      callback(new Error(`CORS blocked: ${origin}`));
+      callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Handle preflight OPTIONS requests globally
