@@ -15,10 +15,26 @@ import ProfilePage from './pages/ProfilePage';
 
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <Router>
+      <Toaster position="top-right" toastOptions={{
+        style: {
+          background: '#0F172A',
+          color: '#F8FAFC',
+          border: '1px solid rgba(255,255,255,0.05)',
+          borderRadius: '1rem',
+          fontWeight: 'bold',
+        },
+        success: {
+          iconTheme: {
+            primary: '#22C55E',
+            secondary: '#0F172A',
+          },
+        },
+      }} />
       <Routes>
         {/* Auth Routes */}
         <Route element={<AuthLayout />}>

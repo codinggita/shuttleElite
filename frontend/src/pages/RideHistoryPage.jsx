@@ -3,6 +3,7 @@ import { Calendar, ChevronRight, Bus, Download, Filter, Loader2 } from 'lucide-r
 import { useNavigate } from 'react-router-dom';
 import Card from '../components/Card';
 import Button from '../components/Button';
+import toast from 'react-hot-toast';
 
 const RideHistoryPage = () => {
   const navigate = useNavigate();
@@ -50,11 +51,12 @@ const RideHistoryPage = () => {
       const data = await res.json();
       if (res.ok) {
         setRides(rides.map(ride => ride._id === rideId ? { ...ride, status: newStatus } : ride));
+        toast.success(`Ride status updated to ${newStatus}`);
       } else {
-        alert(data.message || "Update failed");
+        toast.error(data.message || "Update failed");
       }
     } catch (err) {
-      alert("Error updating status");
+      toast.error("Error updating status");
     }
   };
 
@@ -79,7 +81,7 @@ const RideHistoryPage = () => {
           <Button 
             variant="secondary" 
             className="flex-1 sm:flex-none"
-            onClick={() => alert('Filter options: Date range, Shuttle ID, Route.')}
+            onClick={() => toast.info('Filter features coming soon!')}
           >
             <Filter className="w-4 h-4 mr-2" />
             Filter
@@ -87,7 +89,7 @@ const RideHistoryPage = () => {
           <Button 
             variant="outline" 
             className="flex-1 sm:flex-none"
-            onClick={() => alert('Preparing CSV/PDF export for your ride history...')}
+            onClick={() => toast.loading('Generating export...', { duration: 2000 })}
           >
             <Download className="w-4 h-4 mr-2" />
             Export
@@ -125,7 +127,7 @@ const RideHistoryPage = () => {
         ) : rides.map((ride) => (
           <Card 
             key={ride._id} 
-            onClick={() => alert(`Showing receipt and details for ride ${ride._id}`)}
+            onClick={() => toast.success(`View Details: REQ-${ride._id.slice(-4).toUpperCase()}`)}
             className="group relative overflow-hidden transition-all duration-500 hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
           >
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">

@@ -4,6 +4,7 @@ import { MapPin, Clock, Calendar, ChevronLeft, Info, Sparkles } from 'lucide-rea
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import toast from 'react-hot-toast';
 
 const RideRequestPage = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const RideRequestPage = () => {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Ride booked successfully");
+        toast.success("Ride booked successfully");
         navigate('/confirm');
       } else {
         setError(data.message || "Failed to book ride");
