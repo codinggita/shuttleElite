@@ -4,6 +4,7 @@ import { ArrowRight, AlertCircle } from 'lucide-react';
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import toast from 'react-hot-toast';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ const LoginPage = () => {
         // Success: Store token and user info, then navigate
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
+        toast.success(`Welcome back, ${data.user.name}`);
         navigate('/dashboard');
       } else {
         // Error: Show message from backend
@@ -101,7 +103,7 @@ const LoginPage = () => {
               <div className="flex justify-end">
                 <button 
                   type="button" 
-                  onClick={() => alert('Password reset link sent to your corporate email.')}
+                  onClick={() => toast.success('Password reset link sent to your corporate email.')}
                   className="text-[10px] font-black text-primary uppercase tracking-[0.15em] hover:text-primary-dark transition-colors py-1"
                 >
                   Forgot Password?

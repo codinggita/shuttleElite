@@ -1,5 +1,6 @@
 
 import { Phone, MessageSquare, ShieldCheck, Star } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const DriverInfoCard = () => {
   return (
@@ -26,13 +27,13 @@ const DriverInfoCard = () => {
         </div>
         <div className="flex gap-2">
           <button 
-            onClick={() => alert('Initiating VOIP call to driver...')}
+            onClick={() => toast.info('Initiating secure VOIP call...')}
             className="p-3 bg-white/5 hover:bg-primary/10 hover:text-primary border border-white/5 rounded-2xl transition-all"
           >
             <Phone className="w-5 h-5" />
           </button>
           <button 
-            onClick={() => alert('Opening secure chat with driver...')}
+            onClick={() => toast.info('Opening secure encrypted chat...')}
             className="p-3 bg-white/5 hover:bg-primary/10 hover:text-primary border border-white/5 rounded-2xl transition-all"
           >
             <MessageSquare className="w-5 h-5" />
