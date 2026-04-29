@@ -28,10 +28,13 @@ const RideHistoryPage = () => {
       if (res.ok) {
         setRides(data.rides);
       } else {
-        setError(data.message || "Failed to load rides");
+        const msg = data.message || "Failed to load rides";
+        setError(msg);
+        toast.error(msg);
       }
     } catch (err) {
       setError("Failed to connect to backend");
+      toast.error("Network error: Server unreachable");
     } finally {
       setLoading(false);
     }

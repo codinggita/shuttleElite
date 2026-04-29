@@ -44,10 +44,13 @@ const RideRequestPage = () => {
         toast.success("Ride booked successfully");
         navigate('/confirm');
       } else {
-        setError(data.message || "Failed to book ride");
+        const msg = data.message || "Failed to book ride";
+        setError(msg);
+        toast.error(msg);
       }
     } catch (err) {
       setError("Something went wrong. Please check if backend is running.");
+      toast.error("Booking failed: Security server offline");
     } finally {
       setLoading(false);
     }
